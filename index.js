@@ -31,6 +31,3 @@ let names = map(
     return user.age >= 30
   }),
   user => user.name);
-
-
-console.log(ages, names);
