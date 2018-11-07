@@ -1,10 +1,33 @@
-let users = [
-  { id: 1, name: "ID", age: 32 },
-  { id: 2, name: "DA", age: 12 },
-  { id: 3, name: "GD", age: 64 },
-  { id: 4, name: "HB", age: 23 },
-  { id: 5, name: "YE", age: 53 },
-  { id: 6, name: "PN", age: 29 },
+let users = [{
+    id: 1,
+    name: "ID",
+    age: 32
+  },
+  {
+    id: 2,
+    name: "DA",
+    age: 12
+  },
+  {
+    id: 3,
+    name: "GD",
+    age: 64
+  },
+  {
+    id: 4,
+    name: "HB",
+    age: 23
+  },
+  {
+    id: 5,
+    name: "YE",
+    age: 53
+  },
+  {
+    id: 6,
+    name: "PN",
+    age: 29
+  },
 ];
 
 
@@ -20,14 +43,9 @@ const map = (list, iteratee) => {
   return newList;
 }
 
-let ages = map(
-  filter(users, function (user) {
-    return user.age < 30
-  }),
-  user => user.age);
+const logLength = val => val;
+const bindValues = key => obj => obj[key];
 
-let names = map(
-  filter(users, function (user) {
-    return user.age >= 30
-  }),
-  user => user.name);
+
+console.log(logLength(map(filter(users, u => u.age < 30), bindValues('age'))));
+console.log(logLength(map(filter(users, u => u.age >= 30), bindValues('name'))));
