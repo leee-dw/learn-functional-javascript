@@ -45,13 +45,46 @@ console.log(ages);
 
 
 
-function _filter(users) {
+function _filter(list, predict) {
   var newList = [];
-  for ( var i = 0; < users.length; i++) {
-    if (users[i].age >= 30) {
-      newList.push(users[i])
+  for ( var i = 0; i < list.length; i++ ) {
+    if (predict(list[i])) {
+      newList.push(list[i])
     }
   }
   return newList
 }
+
+
+function _map(list, mapper) {
+  let newList = [];
+  list.forEach( v => {
+    newList.push(mapper(v))
+  })
+  return newList
+}
+
+
+
+
+
+var over30 = _filter(users, function(user) { return user.age >= 30 })
+var under30 = _filter(users, function(user) { return user.age < 30 })
+
+var userNames = _map(over30, function(user){
+  return user.name
+})
+console.log("userNames:", userNames)
+
+var userAges = _map(under30, function(user){
+  return user.age
+})
+console.log("userAges:", userAges)
+
+console.log (
+  _filter([1,2,3,4,5], function(num) { return num % 2 }),
+  _filter([1,2,3,4,5], function(num) { return !(num % 2) })
+)
+
+console.log(_map([1, 2, 3, 4, 5], function(num){ return num * 2}))
 
