@@ -1,1 +1,2 @@
-# functional-javascript
+# Functional Programming
+

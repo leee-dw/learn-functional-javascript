@@ -1,51 +1,39 @@
-let users = [{
-    id: 1,
-    name: "ID",
-    age: 32
-  },
-  {
-    id: 2,
-    name: "DA",
-    age: 12
-  },
-  {
-    id: 3,
-    name: "GD",
-    age: 64
-  },
-  {
-    id: 4,
-    name: "HB",
-    age: 23
-  },
-  {
-    id: 5,
-    name: "YE",
-    age: 53
-  },
-  {
-    id: 6,
-    name: "PN",
-    age: 29
-  },
-];
+// 일급함수
 
+const f1 = a => a * a;
 
-const filter = (list, predict) => {
-  let newList = [];
-  list.forEach(el => predict(el) && newList.push(el))
-  return newList;
+console.log(f1);
+
+function f2(f) {
+  return f();
 }
 
-const map = (list, iteratee) => {
-  let newList = [];
-  list.forEach(el => newList.push(iteratee(el)));
-  return newList;
+console.log(f2(() => 10));
+
+
+function addMaker(a) {
+  return function (b) {
+    return a + b;
+  };
 }
 
-const logLength = val => val;
-const bindValues = key => obj => obj[key];
+const add10 = addMaker(10);
+
+console.log(add10(20));
+
+const add5 = addMaker(5);
+const add15 = addMaker(15);
+
+console.log(add5(10));
+console.log(add15(10));
+
+function f4(a1, a2, a3) {
+  return a3(a1() + a2());
+}
 
 
-console.log(logLength(map(filter(users, u => u.age < 30), bindValues('age'))));
-console.log(logLength(map(filter(users, u => u.age >= 30), bindValues('name'))));
+console.log(f4(
+  () => 2,
+  () => 1,
+  a => a * a,
+));
