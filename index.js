@@ -85,3 +85,6 @@ console.log(names)
 console.log(ages)
 console.log(_map(_filter(users, user => user.age >= 30), user => user.name))
 console.log(_map(_filter(users, user => user.age < 30), user => user.age))
+
+
+
