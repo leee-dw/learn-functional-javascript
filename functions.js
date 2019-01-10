@@ -1,10 +1,12 @@
-function _filter(users = [], predicate) {
+function _filter(users, predicate) {
   var newList = []
   _each(users, val => {
     if (predicate(val)) newList.push(val)
   })
   return newList
 }
+
+
 
 
 
@@ -15,6 +17,8 @@ function _map(list = [], mapper) {
   })
   return newList
 }
+
+
 
 
 
@@ -30,11 +34,14 @@ function _each(list, iter) {
 
 
 
+
+
 function _curry(fn) {
   return function(a, b) {
     return arguments.length == 2 ? fn(a, b) : function(b) { return fn(a, b) }
   }
 }
+
 
 
 
@@ -47,10 +54,13 @@ function _curryr(fn) {
 
 
 
+
 function _rest(list, num) {
   var slice = Array.prototype.slice
   return slice.call(list, num || 1)
 }
+
+
 
 
 
@@ -67,6 +77,8 @@ function _reduce(list, iter, memo) {
 
 
 
+
+
 function _pipe() {
   var fns = arguments
   return function(arg) {
@@ -75,6 +87,8 @@ function _pipe() {
     }, arg)
   }
 }
+
+
 
 
 
@@ -89,7 +103,6 @@ function _go(arg) {
 var _get = _curryr((obj, key) => obj == null ? undefined : obj[key])
 var _map = _curryr(_map)
 var _filter = _curryr(_filter)
-
 var _length = _get('length')
 
 
@@ -97,17 +110,73 @@ var _length = _get('length')
 
 
 
-console.log(_keys({ name: 'ID', age: 33 }))
-console.log(_keys([1, 2, 3, 4]))
-console.log(_keys(10))
-console.log(_keys(null))
-
-
 function _isObj(obj) {
   return typeof obj == 'object' && !!obj
 }
 
 
+
+
+
 function _keys(obj) {
   return _isObj(obj) ? Object.keys(obj) : []
 }
+
+
+var _values = _map(_identity)
+
+
+
+
+
+function _identity(val) {
+  return val
+}
+
+
+
+
+
+function _pluck(data, key) {
+  return _map(data, _get(key))
+}
+
+
+
+
+
+
+function _reject(data, predicate) {
+  return _filter(data, function(val) {
+    return !predicate(val)
+  })
+}
+
+var arr = [1, 3, 5, 7, 9]
+
+
+
+
+
+
+function _rej(data = [], predi) {
+  return data.filter(_negate(predi))
+}
+
+
+
+
+
+
+function _negate(func) {
+  return function(val) {
+    return !func(val)
+  }
+}
+
+
+
+var _compact = _filter(_identity);
+
+
+console.log(_rej(arr, v => v < 5))
