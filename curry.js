@@ -3,19 +3,7 @@
 
 
 
-function _curry(fn) {
-  return function(a, b) {
-    return arguments.length == 2 ? fn(a, b) : function(b) { return fn(a, b) }
-  }
-}
 
-function _curryr(fn) {
-  return function(a, b) {
-    return arguments.length == 2 ? fn(a, b) : function(b) { return fn(b, a) }
-  }
-}
-
-const _get = _curryr((obj, key) => obj == null ? undefined : obj[key])
 
 
 var add = _curry(function(a, b) {
